@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+    filecolor=magenta}
+\graphicspath{ {./downloads/} }
+\title{Experiment 1: Oscilloscope}
+\author{Marlene McKinney}
+\date{February 23, 2026}
+
+\begin{document}
+\maketitle
+\section{Introduction and Methods}
+Oscilloscopes are useful pieces of lab equipment that have the ability to quantify a given function to display a waveform and even compute the frequencies that make up that waveform using Fast Fourier Transform.
+
+Fast Fourier Transform, or FFT, is a method of using Fourier transforms to condense sinusoidal signals into peaks of their constituent frequencies. For example, FFT can be used to distinguish unique whale sounds to help identify each individual porpoise in aquatic studies. Using numpy, one can use this built-in function to find the constituent frequencies of a given signal. 
+
+In this lab, a tuning fork was hit to produce an audible oscillation that was measured by an oscilloscope through microphone input. The oscilloscope's built-in FFT function allowed for precise measurement of the tuning fork's fundamental frequency through analysis of its comma-separated values file containing the frequency values and their respective levels in decibels (dB). Tuning Fork 1 was used for this experiment, and its theoretical fundamental frequency was calculated based on its physical properties, allowing for comparison to the measured frequency from the oscilloscope.
+
+\begin{figure}[h!t]
+\includegraphics[width=10cm]{Experiment Schematic for Lab 1 (1)}
+\centering
+\caption{Visual schematic of the experiment.}
+\end{figure}
+
+\section{Results and Discussion}
+\begin{figure}[h!t]
+\includegraphics[width=10cm]{tuning fork 1 fft}
+\centering
+\caption{FFT frequency plot showing the fundamental frequency between 800 and 1000 Hz and the plot zooming in on that region to pinpoint the exact fundamental frequency.}
+\end{figure}
+
+\begin{figure}[h!t]
+\includegraphics[width=9 cm]{Tuning Fork Dimensions (1)}
+\centering
+\caption{Dimensions of the tuning fork used to calculate the theoretical fundamental frequency.}
+\end{figure}
+
+The measured frequency for Tuning Fork 1 is approximately 899.24 Hz.
+
+The equation for calculating the theoretical fundamental frequency of a tuning fork is given by
+
+\[f = \frac{{1.875}^2}{2\pi{L}^2}\sqrt{\frac{EI}{{\rho}A}}\]
+
+from \cite{fundamental}, where L is the length of the tuning fork's prongs, E is the Young's modulus of the tuning fork's material, I is the second moment of area of the beam's cross-section, $\rho$ is the density of the tuning fork's material, and A is the cross-sectional area of the prongs. According to \cite{gyration}, I can be expressed in terms of b and d, which are denoted in Figure 3:
+
+\[I =\frac{b{d}^3}{12}.\]
+
+As a result, we can rewrite the equation for the theoretical fundamental frequency as 
+
+\[f = \frac{{1.875}^2}{2\pi{L}^2}\sqrt{\frac{Eb{d}^3}{12{\rho}bz}},\]
+
+and further simplify it to be
+
+\[f = \frac{{1.875}^2}{2\pi{L}^2}\sqrt{\frac{E{d}^3}{12{\rho}z}}.\]
+
+The parameters are listed below with their respective values, with $\rho$ from \cite{steel} and E from \cite{youngsmodulus}:
+
+\begin{table}[h!]
+\begin{tabularx}{1\textwidth} { 
+  | >{\raggedright\arraybackslash}X 
+  | >{\centering\arraybackslash}X 
+  | >{\centering\arraybackslash}X
+  | >{\centering\arraybackslash}X
+  | >{\raggedleft\arraybackslash}X}
+
+ \hline
+ Parameter & Value \\
+ \hline
+L  & 76.16 mm  \\
+\hline
+E & 200 GPa \\
+\hline
+b & 7.05 mm \\
+\hline
+d & 24.96 mm \\
+\hline
+$\rho$ &7850 kg/$m^3$ \\
+\hline
+z & 14.05 mm \\
+\hline
+
+\end{tabularx}
+\end{table}
+
+
+We can now substitute our known values into the equation for all of the variables:
+
+\[f = \frac{{1.875}^2}{2\pi*{(76.16 * {10}^{-3}})^2}\sqrt{\frac{200 * {10}^9*{(24.96 * {10}^{-3}})^3}{12*{7650}*{14.05 * {10}^{-3}}}} = 4736.86679\] 
+
+
+There is a difference between the value of the measured fundamental frequency from the oscilloscope and the theoretical fundamental frequency most likely due to the composition of the tuning fork, which may have been a specific steel alloy not represented by the graphs and potentially the expressions used for the second moment of area may have been inaccurate since it may not apply to a tuning fork.
+
+
+\section{Code Used Here}
+The data and code for the plots in the Results section and the LaTeX code for this document can be found on \href{https://github.com/marloonles/advancedlab2}{GitHub}.
+
+\section{References}
+\bibliographystyle{apalike}
+\bibliography{advlab2lab1}
+\end{document}
