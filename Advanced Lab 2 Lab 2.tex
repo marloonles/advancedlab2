@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue
+    filecolor=magenta}
+\graphicspath{ {./downloads/} }
+\title{Experiment 2: Speed of Sound in Metal}
+\author{Marlene McKinney}
+\date{March 9, 2026}
+
+\begin{document}
+\maketitle
+\section{Introduction and Methods}
+Sound is a mechanical and longitudinal wave, which means that the movement of particles in the medium is perpendicular to the propagation of the wave. Oscilloscopes are useful pieces of lab equipment that have the ability to quantify a given function to display a waveform given an input.
+
+This experiment uses the point of contact of metal rod and the time it takes for it to hit a piezoelectric material to find the speed of sound for aluminum and copper. The piezoelectric sensor was used as it's sensitive to mechanical stress. The rods were hit with a metal mallet connected to channel 2 of the oscilloscope to measure when contact was made, and the piezoelectric material was connected to channel 1 to measure when the wave made it to the other end of the rod. The time difference between the contacts was retrieved using the find peaks feature from the SciPy library and used with the rod length to find the speed:
+
+\[v_{sound} = \frac{l_{rod}}{{\Delta}t}\]
+
+\begin{figure}[h!t]
+\includegraphics[width=12cm]{advlab2lab2schematic}
+\centering
+\caption{Visual schematic of the experiment.}
+\end{figure}
+
+\section{Results and Discussion}
+The speed of sound values for rolled aluminum and copper were used instead of annealed since rolled metal as it's less malleable and stronger \cite{copper}.
+
+\begin{figure}[h!t]
+\includegraphics[width=11cm]{aluminumplot}
+\centering
+\caption{Time difference plot for the signals from the mallet contact and piezoelectric signal for the aluminum rod.}
+\end{figure}
+
+\begin{figure}[h!t]
+\includegraphics[width=11 cm]{copperplot}
+\centering
+\caption{Time difference plot for the signals from the mallet contact and piezoelectric signal for the copper rod.}
+\end{figure}
+
+\begin{table}[h!]
+\begin{tabularx}{1\textwidth} {
+| >{\centering\arraybackslash}X
+| >{\centering\arraybackslash}X
+| >{\centering\arraybackslash}X
+| >{\centering\arraybackslash}X
+| >{\centering\arraybackslash}X
+| >{\centering\arraybackslash}X|}
+
+ \hline
+Metal & Rod Length & {$\Delta$t} & Calculated Speed & Theoretical Speed (Tranverse) & Theoretical Speed (Longitudinal)\\
+ \hline
+Copper (rolled) & 1 m & 0.000354 s & 2824.859 m/s & 2270 m/s & 5010	 m/s \\
+\hline
+Aluminum & 0.911 m & 0.000319 s & 2855.799 m/s &  3040 m/s & 6420	 m/s \\
+\hline
+
+\end{tabularx}
+\end{table}
+
+Since speed is a longitudinal wave, one would expect the calculated speed from the experiments to yield speeds close to that of the longitudinal theoretical speed, but they were closer to that for the transverse speeds, both of which were obtained from \cite{metalspeed}. This difference is potentially due to a timing offset due to the trigger time used to get the signals from the oscilloscope for time difference acquisition.
+
+In a real lab, one could have a set up where they could do these experiments with different rods enough times to find a very accurate value for the speed of sound. This could be done through an automation routine where the mallet is setup so it consistently hits the rods with the same force, which would be helpful if the rods are the same length. Then the signals would be collected to find the time differences for however many trials. This could also help troubleshoot why the speeds obtained from this experiment yielded unexpected values.
+
+
+\section{Code Used Here}
+The data and code for the plots in the Results section and the LaTeX code for this document can be found on \href{https://github.com/marloonles/advancedlab2}{GitHub}.
+
+\bibliographystyle{apalike}
+\bibliography{advlab2lab2}
+\end{document}
